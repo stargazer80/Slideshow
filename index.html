@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Slideshow_01</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta name="author" content="The Chopping Block, Inc." />
+	<meta name="geo.country" content="US" />
+	<meta name="dc.language" content="en" />
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	
+	<link rel="stylesheet" href="styles.css" type="text/css" media="screen" charset="utf-8" />
+	
+	<style type="text/css" media="screen">		
+		/*local styles if any (quick tests and local only overrides)*/
+		
+		#image_container{
+			height: 400px;
+			width: 400px;
+/*			overflow: hidden;*/
+		}
+		
+		#image_container img{
+			display: block;
+			height: 100%;
+/*			left: 50%;
+			-webkit-transform: translate(-25%);
+*/		}
+	</style>
+</head>
+<body>
+
+	<div class="wrap" >
+		Project: Slideshow_01
+		
+		The simplest slideshow just replaces the src attribute of an img, via JS
+		<br>
+		<div id="image_container"><img src="1.jpg"></div>
+		
+		<br>
+		<button id="previous">Previous</button>
+		<button id="next">Next</button>
+
+	</div>
+	<script type="text/javascript" charset="utf-8">
+
+		// Simplest Replacement of image src attribute
+		var img = document.querySelector("img");
+		// img.src = "http://placehold.it/200x200/003";
+		
+		// Remember: Length of array is 4
+		// Last index is 3, because we start counting at 0
+		// 
+		// var images = [   "http://placehold.it/200x200/303"
+		// 				,"http://placehold.it/200x200/AA0000"
+		// 				,"http://placehold.it/200x200/00BB00"
+		// 				,"http://placehold.it/200x200/0000FF"];
+		
+		
+		var images = [   "1.jpg"
+						,"2.jpg"
+						,"3.jpg"
+						,"4.jpg"
+						, "5.jpg"];		
+		
+		// Cycling through the images in the array as you click previous or next
+		// For this, we're not gonna need a for loop
+		// We're gonna need a global variable that contains the current index of the image that is being shown
+		
+		var index = 0;
+		
+		
+		// for (var i=0; i < images.length; i++) {
+		// 	img.src = images[i];
+		// };
+		
+		
+		// For the next button, when it is clicked
+		//  Look at the value of your index variable		
+		//  Get the string in next index from the array
+				// We need to check whether the next index exists or not
+				// Check whether the current index is the last in the array (RED FLAG: CONDITIONAL)
+				// The last index in the array is 1 less than the length
+				// If we are at the last index in the array, let's loop back to the being by setting the index variable
+				// to the first index in the array (0)
+		//	Assign that string to the src attribute of the image
+		//	
+		
+		var nextButton = document.querySelector("#next");
+		
+		nextButton.onclick = function(){
+		
+		   // Check whether the current index is the last in the array (RED FLAG: CONDITIONAL)
+			if( index+1 < images.length){
+				// Get the string in next index from the array
+				index = index+1;
+				
+			}else{
+				// If we are at the last index in the array, let's loop back to the being by setting the index variable
+				index = 0;
+			}
+			
+			img.src = images[index];
+			
+		}
+		
+		
+		var preButton = document.querySelector("#previous");
+		
+		preButton.onclick = function(){
+		
+		   // Check whether the current index is the last in the array (RED FLAG: CONDITIONAL)
+			if( index > 0){
+				// Get the string in next index from the array
+				index = index-1;
+				
+			}else{
+				// If we are at the last index in the array, let's loop back to the being by setting the index variable
+				index = images.length-1;
+			}
+			
+			img.src = images[index];
+			
+		}
+		
+		
+		
+	</script>
+</body>
+</html>
